@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Chat-Bot</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'chat.css' %}">
+</head>
+<body>
+    <div class="chat-container">
+        <header class="chat-header">
+            <h1>Chat-Bot</h1>
+        </header>
+        <div class="chat-content">
+            <div class="chat-box">
+                {% if responses %}
+                    {% for question, answer in responses.items %}
+                        <div class="question">
+                            <p><strong>Bot:</strong> {{ question }}</p>
+                        </div>
+                        <div class="answer">
+                            <p><strong>You:</strong> {{ answer }}</p>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+
+                {% if current_question %}
+                    <div class="question">
+                        <p><strong>Bot:</strong> {{ current_question }}</p>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+        {% if current_question %}
+        <div class="chat-form">
+            <form action="" method="POST">
+                {% csrf_token %}
+                <input type="text" name="answer" placeholder="Enter your answer..." required>
+                <button type="submit">Send</button>
+            </form>
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>

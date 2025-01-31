@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    {% load static%}
+    <link rel="stylesheet" href="{% static 'register.css' %}">
+    {% comment %} <script src="{% static 'js/main.js' %}" defer></script> {% endcomment %}
+    
+</head>
+<body>
+    <div class = "login-page">
+        <h2>Register</h2>
+        <form action="" method = "POST">
+            {% csrf_token %}
+            <label for="name">User Name :</label>
+            <input type="text" id="name" name="name" required>
+            <br>
+            <label for="Email">Email :</label>
+            <input type="email" id="email" name="email" required>
+            <br>
+            <label for="password">Password :</label>
+            <input type="password" id="password" name="password" required onclick=validate_password() >
+        
+            <br>
+            <label for="Re-password"> Confirm Password :</label>
+            <input type="password" id="password" name="password" required>
+            <br><br>
+            {% if messages %}
+                {% for message in messages %}
+                    {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
+                        <div class="message">
+                            {{ message }}
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+            <br><br>
+            <button type = submit>Submit</button>
+            <p>Already registered?. Please Login here. <a href="/login">Login</a></p>
+        </form>
+    </div>
+
+
+</body>
+</html>
